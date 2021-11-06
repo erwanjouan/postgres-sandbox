@@ -1,4 +1,11 @@
-PG_HOME:=/usr/lib/postgresql/10/bin
+# Linux
+#PG_HOME:=/usr/lib/postgresql/10/bin
+#PG_USERNAME:=lena
+#PG_GROUPNAME:=lena
+#sudo chown -R $(PG_USERNAME):$(PG_GROUPNAME) /var/run/postgresql
+
+# MAC OS X
+PG_HOME:=/usr/local/bin
 
 PG_PORT:=5433
 PG_DB_NAME:=mydb
@@ -22,15 +29,13 @@ create_instance:
 	make create_db_table_primary && \
 	make create_replica_instance && \
 	make create_db_table_replica
-
+		
 create_primary_instance:
-	@$(PG_HOME)/pg_ctl init -s -D $(PG_DATA_FOLDER) -l pg.log && \
-	sudo chown -R lena:lena /var/run/postgresql && \
+	@echo $(PG_HOME)/pg_ctl && $(PG_HOME)/pg_ctl init -s -D $(PG_DATA_FOLDER) -l pg.log && \
 	$(PG_HOME)/pg_ctl -w -s -D $(PG_DATA_FOLDER) -l pg.log -o "-p $(PG_PORT)" start
 
 create_replica_instance:
 	@$(PG_HOME)/pg_ctl init -s -D $(PG_REPLICA_DATA_FOLDER) -l pg.log && \
-	sudo chown -R lena:lena /var/run/postgresql && \
 	$(PG_HOME)/pg_ctl -w -s -D $(PG_REPLICA_DATA_FOLDER) -l pg.log -o "-p $(PG_REPLICA_PORT)" start
 
 drop_primary_instance:
