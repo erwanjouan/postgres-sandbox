@@ -3,11 +3,11 @@
 ### Pre-requesite
 A postgresql distribution installed locally through package manager
 
-### Basic Scenario
+### Hands on
 
 Create a primary instance and a replica
 ```sh
-make create_replicated_instance
+make create_instances
 ```
 
 Activate wal_level=logical on primary and bind replica to primary
@@ -28,5 +28,5 @@ make dump_replica_table
 
 Clean
 ```sh
-make drop_instance
+make drop_instances
 ```
