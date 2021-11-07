@@ -1,11 +1,11 @@
-## Processus
+## Processes
 
 [PostgreSQL - 5. Fonctionnement : les processus | tutos fr](https://www.youtube.com/watch?v=xZ_RmnMSGYQ&list=PLn6POgpklwWonHjoGXXSIXJWYzPSy2FeJ&index=6)
 
 
 ### Principle
 
-Parent Process is ```postgres```. Each connection will make a fork of main process.
+Postgres parent process is called ```postgres```. Each connection will make a fork of main process.
 
 #### __checkpointer__
 
