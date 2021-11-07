@@ -24,7 +24,7 @@ PSQL_PRIMARY:=psql -d $(PG_DB_NAME) -p $(PG_PORT)
 PSQL_POSTGRES_REPLICA:=psql -d postgres -p $(PG_REPLICA_PORT)
 PSQL_REPLICA:=psql -d $(PG_REPLICA_DB_NAME) -p $(PG_REPLICA_PORT)
 
-create_instance:
+create_replicated_instance:
 	@make create_primary_instance && \
 	make create_db_table_primary && \
 	make create_replica_instance && \
