@@ -2,3 +2,4 @@ primary_data
 replica_data
 data
 .idea
+**/pg.log
