@@ -3,9 +3,9 @@
 Source
 [Xavki playlist](https://www.youtube.com/watch?v=_LmASWXwdoM&list=PLn6POgpklwWonHjoGXXSIXJWYzPSy2FeJ)
 
-## Processus
+## Processes
 
-[Processus](notes/processus.md)
+[Processes](processes/processes.md)
 
 ## Logical Replication
 
