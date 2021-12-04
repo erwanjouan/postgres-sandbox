@@ -5,7 +5,10 @@
 #sudo chown -R $(PG_USERNAME):$(PG_GROUPNAME) /var/run/postgresql
 
 # MAC OS X
-PG_HOME:=/usr/local/bin
+#PG_HOME:=/usr/local/bin
+
+# Fedora
+PG_HOME=/usr/bin
 
 PG_PORT:=5433
 PG_DB_NAME:=mydb
@@ -16,12 +19,16 @@ PG_DATA_FOLDER:=primary_data
 PSQL_POSTGRES_PRIMARY:=psql -d postgres -p $(PG_PORT)
 PSQL_PRIMARY:=psql -d $(PG_DB_NAME) -p $(PG_PORT)
 
+fix_directory_permission:
+	sudo chown -R postgres:postgres /var/run/postgresql && \
+	sudo chmod a+w /var/run/postgresql
+
 create_primary_instance:
-	@echo $(PG_HOME)/pg_ctl && $(PG_HOME)/pg_ctl init -s -D $(PG_DATA_FOLDER) -l pg.log && \
-	$(PG_HOME)/pg_ctl -w -s -D $(PG_DATA_FOLDER) -l pg.log -o "-p $(PG_PORT)" start
+	$(PG_HOME)/pg_ctl init -D $(PG_DATA_FOLDER) -o "--auth-local=trust" -l pg.log && \
+	$(PG_HOME)/pg_ctl -w -D $(PG_DATA_FOLDER) -l pg.log -o "-p $(PG_PORT)" start
 
 drop_primary_instance:
-	@$(PG_HOME)/pg_ctl -s -D $(PG_DATA_FOLDER) -l pg.log stop && \
+	$(PG_HOME)/pg_ctl -D $(PG_DATA_FOLDER) -l pg.log stop && \
 	rm -rf $(PG_DATA_FOLDER)
 
 connect_primary:
